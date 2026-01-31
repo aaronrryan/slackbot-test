@@ -87,9 +87,11 @@ INFO:__main__:Bot is running! Press Ctrl+C to stop.
 
 Once the bot is running, you can interact with it in Slack:
 
-- **Mention the bot**: `@YourBotName hello` - The bot will respond
+- **Mention the bot**: `@YourBotName` - The bot will respond with the current date and time
 - **Say hello**: Send a message containing "hello" in a DM or channel
 - **Use slash command**: Type `/echo your message` - The bot will echo your message
+
+**Important**: Make sure to invite the bot to the channel first using `/invite @YourBotName`
 
 ## Customization
 
@@ -104,7 +106,16 @@ Edit `bot.py` to add your own functionality:
 
 - **"SLACK_BOT_TOKEN not found"**: Make sure your `.env` file exists and contains the correct token
 - **"SLACK_APP_TOKEN not found"**: Make sure Socket Mode is enabled and you've created an app-level token
-- **Bot doesn't respond**: Check that you've installed the bot to your workspace and added the required scopes
+- **Bot connects but doesn't respond**:
+  1. **Invite the bot to the channel**: In Slack, type `/invite @YourBotName` in the channel where you want to use it
+  2. **Check Event Subscriptions**: Go to your app settings → Event Subscriptions → Make sure "Enable Events" is ON
+  3. **Subscribe to bot events**: Under "Subscribe to bot events", add:
+     - `app_mentions` (to respond when mentioned)
+     - `message.channels` (to read channel messages)
+     - `message.im` (to read direct messages)
+  4. **Check bot scopes**: Ensure you have `app_mentions:read`, `chat:write`, and `channels:history` scopes
+  5. **Restart the bot**: After changing app settings, restart your bot (`Ctrl+C` and run `python3 bot.py` again)
+  6. **Check logs**: The bot logs all events - look for "Bot mentioned" messages in the terminal
 - **Connection issues**: Verify both tokens are correct and Socket Mode is enabled in your app settings
 
 ## Resources
