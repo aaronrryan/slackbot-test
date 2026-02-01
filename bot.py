@@ -135,7 +135,7 @@ def handle_message_events(event: dict, say):
             try:
                 logger.info(f"Processing DM question with OpenAI: {text}")
                 response = openai_client.chat.completions.create(
-                    model="gpt-5-mini",
+                    model="gpt-4o-mini",
                     messages=[
                         {"role": "system", "content": "You are a helpful assistant in a Slack workspace. Provide concise, clear answers."},
                         {"role": "user", "content": text}
