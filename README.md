@@ -7,6 +7,8 @@ A simple Slack bot that runs locally using Python and Socket Mode, perfect for f
 - Runs locally without needing a public endpoint
 - Uses Socket Mode for real-time communication
 - Responds to mentions, messages, and slash commands
+- **AI-powered question answering** using OpenAI API
+- Returns current date and time when mentioned
 - Easy to extend with custom functionality
 
 ## Prerequisites
@@ -14,6 +16,7 @@ A simple Slack bot that runs locally using Python and Socket Mode, perfect for f
 - Python 3.8 or higher
 - A Slack workspace (free tier works)
 - A Slack app created in your workspace
+- (Optional) OpenAI API key for AI question answering - Get one at [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 
 ## Setup Instructions
 
@@ -69,7 +72,10 @@ A simple Slack bot that runs locally using Python and Socket Mode, perfect for f
    ```
    SLACK_BOT_TOKEN=xoxb-your-actual-bot-token
    SLACK_APP_TOKEN=xapp-your-actual-app-token
+   OPENAI_API_KEY=sk-your-openai-api-key-here
    ```
+   
+   **Note**: The `OPENAI_API_KEY` is optional. If not provided, the bot will still work but won't be able to answer questions with AI.
 
 ### 6. Run the Bot
 
@@ -87,11 +93,16 @@ INFO:__main__:Bot is running! Press Ctrl+C to stop.
 
 Once the bot is running, you can interact with it in Slack:
 
-- **Mention the bot**: `@YourBotName` - The bot will respond with the current date and time
+- **Ask a question (with AI)**: 
+  - Mention the bot: `@YourBotName What is Python?` - The bot will answer using AI
+  - Or send a direct message with your question
+- **Get date/time**: `@YourBotName` (without a question) - The bot will respond with the current date and time
 - **Say hello**: Send a message containing "hello" in a DM or channel
 - **Use slash command**: Type `/echo your message` - The bot will echo your message
 
-**Important**: Make sure to invite the bot to the channel first using `/invite @YourBotName`
+**Important**: 
+- Make sure to invite the bot to the channel first using `/invite @YourBotName`
+- For AI question answering, make sure you've set `OPENAI_API_KEY` in your `.env` file
 
 ## Customization
 
